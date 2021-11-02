@@ -9,14 +9,24 @@ def task1():
     subMassive = pd.Series(subData, index=[roman.toRoman(i + 1) for i in range(len(subData))])
     print(subMassive)
 
-    print('\nЗвернення за прямим індексом:\n{}'.format(subMassive.loc['XXXIV':'XL']))
+    print('\nЗвернення за прямим індексом:\n{}'. format(subMassive.loc['XXXIV':'XL']))
     print('\nЗвернення за прямим індексом:\n{}'.format(subMassive[33:40]))
 
 
 def task2():
     data = pd.read_csv('Birthweight.csv')
-    data['ratio'] = round(data['Length'] / data['Birthweight'], 2)
+    data['ratio'] = round(data['Length']/data['Birthweight'], 2)
     print(data)
+    return data
+
+
+def task3(dataFrameObj):
+    indexesName = [[*['Test 1' for _ in range(len(dataFrameObj.index) // 2)], *['Test 2' for _ in range(len(dataFrameObj.index) // 2)]],
+                   [*[i + 1 for i in range(len(dataFrameObj.index) // 2)], *[roman.toRoman(i + 1) for i in range(len(dataFrameObj.index) // 2)]]]
+    indexes = list(zip(*indexesName))
+    multiInd = pd.MultiIndex.from_tuples(indexes)
+    multiIndexObject = pd.DataFrame(dataFrameObj.values, index=multiInd)
+    print(multiIndexObject)
 
 
 def task4():
@@ -46,5 +56,6 @@ def task4():
 
 
 task1()
-task2()
+dataFrame = task2()
+task3(dataFrame)
 task4()
