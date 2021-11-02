@@ -12,4 +12,9 @@ def task1():
     print('\nЗвернення за прямим індексом:\n{}'. format(subMassive.loc['XXXIV':'XL']))
     print('\nЗвернення за прямим індексом:\n{}'.format(subMassive[33:40]))
 
+def task2():
+    data = pd.read_csv('Birthweight.csv')
+    data['ratio'] = round(data['Length']/data['Birthweight'], 2)
+    print(data)
 task1()
+task2()
